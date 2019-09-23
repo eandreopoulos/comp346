@@ -3,10 +3,18 @@ package Lab2;
 public class Main{
     public static void main(String[] args){
         Account ac = new Account();
-        new Dipositor(ac).start();
-        new Withdrawer(ac).start();
-        System.out.println("Balance : " +ac.bal);
-
+        Dipositor dip = new Dipositor(ac);
+        dip.start();
+        Withdrawer withd = new Withdrawer(ac);
+        withd.start();
+        try {
+        	dip.join();
+        	withd.join();
+        }catch (InterruptedException e) {
+        	e.printStackTrace();
+        
+        }
+        System.out.println("Balance is: " +ac.bal);
     }
     
 }
